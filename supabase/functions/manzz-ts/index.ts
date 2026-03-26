@@ -9,7 +9,7 @@ app.all('/manzz-ts', async (c) => {
 
   // 1. Kalo diketuk pake browser (GET)
   if (c.req.method === 'GET') {
-    return c.text("Gacor rrrr! Bot Manzz-TS udah Idup Bos! Webhook Aman! Lu di: ", path)
+    return c.text("Gacor rrrr! Bot Manzz-TS udah Idup Bos! Webhook Aman!")
   }
 
   // 2. Kalo diketuk pake Telegram (POST)
