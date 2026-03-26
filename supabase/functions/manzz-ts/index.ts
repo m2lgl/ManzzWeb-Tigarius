@@ -1,7 +1,6 @@
 import { Hono } from 'npm:hono'
 
 const app = new Hono()
-app.basePath("/manzz-ts")
 // 1. Definisikan Interface buat TypeScript (Biar Gak Merah-merah)
 interface TelegramUpdate {
   message?: {
