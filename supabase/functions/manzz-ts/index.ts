@@ -15,7 +15,7 @@ interface TelegramUpdate {
 app.post('/', async (c) => {
   try {
     // Ambil body pake await (Standard Hono)
-    const update = await c.req.json<TelegramUpdate>()
+    const update = await c.req.json() as TelegramUpdate
     const msg = update.message
 
     if (msg && msg.text) {
