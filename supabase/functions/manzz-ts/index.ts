@@ -3,13 +3,13 @@ import { Hono } from 'npm:hono'
 const app = new Hono()
 
 // JURUS SAPU JAGAT: Terima semua (GET/POST) di path mana pun
-app.get('/functions/v1/manzz-ts', async (c) => {
+app.all('*', async (c) => {
   const path = c.req.path
   console.log(`[LOG] Ada tamu ngetok di path: ${path}`)
 
   // 1. Kalo diketuk pake browser (GET)
   if (c.req.method === 'GET') {
-    return c.text("Gacor rrrr! Bot Manzz-TS udah Idup Bos! Webhook Aman!")
+    return c.text("Gacor rrrr! Bot Manzz-TS udah Idup Bos! Webhook Aman! Lu di: ", path)
   }
 
   // 2. Kalo diketuk pake Telegram (POST)
