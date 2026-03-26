@@ -1,13 +1,22 @@
 name: Deploy-Tigarius
-on: [push] # Tiap lu push, dia langsung deploy!
+
+on:
+  push:
+    branches:
+      - main  # Atau 'master', cek nama branch lu apa!
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: supabase/setup-cli@v1
-      - run: supabase functions deploy manzz-ts --project-ref ${{ secrets.PROJECT_ID }} --no-verify-jwt
+        with:
+          version: latest
+
+      - name: Deploy manzz-ts
+        run: supabase functions deploy manzz-ts --project-ref ${{ secrets.PROJECT_ID }} --no-verify-jwt
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-concurrency:
-  
+ 
