@@ -41,5 +41,9 @@ app.post('/', async (c) => {
   }
 })
 
+app.get("/", (c) => {
+  c.text("halo ya cuy")
+})
+
 // 3. Jalankan Server Deno
 Deno.serve(app.fetch)
