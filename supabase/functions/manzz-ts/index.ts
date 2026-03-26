@@ -30,4 +30,8 @@ app.all('/manzz-ts', async (c) => {
   }
 })
 
+app.get("/", (c) => {
+  c.text("haha ketemu juga lu anjir")
+})
+
 Deno.serve(app.fetch)
