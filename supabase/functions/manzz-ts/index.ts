@@ -1,48 +1,33 @@
 import { Hono } from 'npm:hono'
 
 const app = new Hono()
-// 1. Definisikan Interface buat TypeScript (Biar Gak Merah-merah)
-interface TelegramUpdate {
-  message?: {
-    chat: { id: number };
-    text?: string;
-    from?: { first_name: string };
-  };
-}
 
-// 2. Route Utama (Webhook Entry Point)
-app.post('/', async (c) => {
+// JURUS SAPU JAGAT: Terima semua (GET/POST) di path mana pun
+app.all('*', async (c) => {
+  const path = c.req.path
+  console.log(`[LOG] Ada tamu ngetok di path: ${path}`)
+
+  // 1. Kalo diketuk pake browser (GET)
+  if (c.req.method === 'GET') {
+    return c.text("Gacor rrrr! Bot Manzz-TS udah Idup Bos! Webhook Aman!")
+  }
+
+  // 2. Kalo diketuk pake Telegram (POST)
   try {
-    // Ambil body pake await (Standard Hono)
-    const update = await c.req.json() as TelegramUpdate
+    const update = await c.req.json() as any
     const msg = update.message
 
     if (msg && msg.text) {
-      const chatId = msg.chat.id
-      const text = msg.text
-      const user = msg.from?.first_name || 'Manusia'
-
-      console.log(`[LOG] Ada chat dari ${user}: ${text}`)
-
-      // Logika Sederhana: Reply Balik
-      // Kita pake return c.json buat ngirim "Webhook Response" (Cara paling kenceng)
       return c.json({
         method: 'sendMessage',
-        chat_id: chatId,
-        text: `Halo ${user}! Manzweb-TS lagi dengerin lu. Tadi lu bilang: "${text}"`,
+        chat_id: msg.chat.id,
+        text: `Halo ${msg.from?.first_name || 'Manusia'}! Manzweb-TS nyaut nih. Lu tadi bilang: ${msg.text}`,
       })
     }
-
     return c.json({ ok: true })
   } catch (err) {
-    console.error('Anjrit Error:', err.message)
-    return c.json({ error: 'Gagal olah data bos!' }, 400)
+    return c.json({ error: 'Mumet bos, datanya aneh!' }, 400)
   }
 })
 
-app.get("/", (c) => {
-  c.text("halo ya cuy")
-})
-
-// 3. Jalankan Server Deno
 Deno.serve(app.fetch)
