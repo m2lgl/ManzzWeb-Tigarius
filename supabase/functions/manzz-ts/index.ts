@@ -3,7 +3,7 @@ import { Hono } from 'npm:hono'
 const app = new Hono()
 
 // JURUS SAPU JAGAT: Terima semua (GET/POST) di path mana pun
-app.get('/function/v1/manzz-ts', async (c) => {
+app.get('/functions/v1/manzz-ts', async (c) => {
   const path = c.req.path
   console.log(`[LOG] Ada tamu ngetok di path: ${path}`)
 
