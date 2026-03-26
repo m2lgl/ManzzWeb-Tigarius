@@ -21,7 +21,7 @@ app.all('*', async (c) => {
       return c.json({
         method: 'sendMessage',
         chat_id: msg.chat.id,
-        text: `Halo ${msg.from?.first_name || 'Manusia'}! Manzweb-TS nyaut nih. Lu tadi bilang: ${msg.text}`,
+        text: `Halo ${msg.from?.first_name || 'Manusia'}! Manzweb-TS nyaut nih. Lu tadi bilang: ${msg.text} dan kamu lewat ${path}`,
       })
     }
     return c.json({ ok: true })
