@@ -1,6 +1,6 @@
 {
   "imports": {
     "hono": "https://esm.sh/hono@3.11.7",
-    "HfInference": "npm:@huggingface/inference"
+    "@huggingface/inference": "npm:@huggingface/inference"
   }
 }
