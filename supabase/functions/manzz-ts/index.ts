@@ -108,10 +108,10 @@ Manzz: "Oke, jadi API itu ibarat pelayan di restoran yang nyampein pesanan kamu 
       // frequency_penalty: 0.5,
       // repetition_penalty: 1.2
     })
-    let fullRes: String;
+    let fullRes = "";
     
     for await (let chunk of aiRes) {
-    let content = chunk.choices[0].message.content;
+    let content = chunk.choices[0].delta?.content;
     if (content) {
       fullRes += content
     }
