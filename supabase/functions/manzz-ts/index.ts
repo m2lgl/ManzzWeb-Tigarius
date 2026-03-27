@@ -1,4 +1,4 @@
-import {HfInference} from "@huggingfsce/inference"
+import {HfInference} from "@huggingface/inference"
 import { Hono } from 'npm:hono'
 
 const app = new Hono()
